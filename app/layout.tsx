@@ -12,7 +12,7 @@ const ibmPlexSerif= IBM_Plex_Serif({
 
 export const metadata: Metadata = {
   title: "IDFC",
-  description: "Your Bank in Your Pocket :)",
+  description: "Your Bank in Your Pocket",
   icons :{
     icon:'/icons/logo.svg'
   }

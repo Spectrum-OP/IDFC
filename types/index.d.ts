@@ -34,6 +34,7 @@ declare type User = {
   firstName: string;
   lastName: string;
   address1: string;
+  name: string;
   city: string;
   state: string;
   postalCode: string;

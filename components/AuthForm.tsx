@@ -23,7 +23,7 @@ import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { signIn, signUp } from '@/lib/actions/user.actions'
+import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 
 
 
@@ -32,6 +32,7 @@ const AuthForm = ({ type }: { type: string }) => {
     const router = useRouter();
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
+
 
     const formSchema = authFormSchema(type);
 
@@ -50,24 +51,24 @@ const AuthForm = ({ type }: { type: string }) => {
 
         try {
             //SIGN Upwith APPWRItE & CREATE A PLAID LINK TOKEN
-            if(type === 'sign-up'){
+            if (type === 'sign-up') {
                 const newUser = await signUp(data);
 
                 setUser(newUser);
             }
 
-            if(type === 'sign-in'){
-                // const response = await signIn({
-                //     email : data.email,
-                //     password : data.password
-                // })
+            if (type === 'sign-in') {
+                const response = await signIn({
+                    email : data.email,
+                    password : data.password
+                })
 
-                // if(response) router.push('/')
+                if(response) router.push('/')
             }
 
         } catch (error) {
             console.log(error);
-        }finally{
+        } finally {
             setIsLoading(false);
         }
     }
@@ -117,18 +118,18 @@ const AuthForm = ({ type }: { type: string }) => {
                                         <CustomInput control={form.control} name="firstName" label="First Name" placeholder="Enter Your First Name" />
                                         <CustomInput control={form.control} name="lastName" label="Last Name" placeholder="Enter Your Last Name" />
                                     </div>
-                                   
+
                                     <CustomInput control={form.control} name="address1" label="Address" placeholder="Enter Your Specific Address" />
                                     <CustomInput control={form.control} name="city" label="City" placeholder="Enter Your City" />
-                                    
+
                                     <div className='flex gap-4'>
                                         <CustomInput control={form.control} name="state" label="State" placeholder="Ex : Bihar" />
                                         <CustomInput control={form.control} name="postalCode" label="Pin Code" placeholder="Ex : 11100110" />
                                     </div>
 
                                     <div className='flex gap-4'>
-                                    <CustomInput control={form.control} name="dateOfBirth" label="Date Of Birth" placeholder="Ex : DD/MM/YYYY" />
-                                    <CustomInput control={form.control} name="ssn" label="SSN" placeholder="Ex : 1234" />
+                                        <CustomInput control={form.control} name="dateOfBirth" label="Date Of Birth" placeholder="Ex : DD/MM/YYYY" />
+                                        <CustomInput control={form.control} name="ssn" label="SSN" placeholder="Ex : 1234" />
                                     </div>
                                 </>
                             )}

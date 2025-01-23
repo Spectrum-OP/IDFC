@@ -12,7 +12,9 @@ export default function RootLayout({
           <div className="auth-asset">
             <div>
               <Image
+              // UPDATE IMAGE On COMPLETION
                 src="/icons/auth-image.svg"
+              // UPDATE IMAGE On COMPLETION
                 alt="Auth Image"
                 width={500}
                 height={500}
